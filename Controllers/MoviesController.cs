@@ -41,5 +41,39 @@ namespace Mission6_Assignment.Controllers
 
             return View(response);
         }
+        // GET
+        public IActionResult Edit(int id)
+        {
+            var movie = _context.Movies.Find(id);
+            return View(movie);
+        }
+
+        // POST
+        [HttpPost]
+        public IActionResult Edit(Movie movie)
+        {
+            _context.Update(movie);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        
+        // GET
+        public IActionResult Delete(int id)
+        {
+            var movie = _context.Movies.Find(id);
+            return View(movie);
+        }
+
+        // POST
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var movie = _context.Movies.Find(id);
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
